@@ -34,4 +34,3 @@ void free_record(void *a)
   struct Record *r1 = (struct Record *)a;
   free_string(r1->field1);
 }
-
