@@ -60,13 +60,13 @@ field1 viene allocato dinamicamente per contenere fino a 64 caratteri. */
         if (sscanf(buffer, "%d,%63[^,],%d,%f", &arr[i].id, arr[i].field1, &arr[i].field2, &arr[i].field3) == -1)
             printf("Errore durante la lettura del file\n");
     }
-    /* compar è un puntatore a funzione che punta alla funzione di 
+    /* compar è un puntatore a funzione che punta alla funzione di
     confronto appropriata basata sul campo specificato (1 per stringa, 2 per intero, 3 per float). */
     Compar compar =
         field == 1 ? compare_records_string : field == 2 ? compare_records_int
                                           : field == 3   ? compare_records_float
                                                          : NULL;
-    /* In base al valore di algo, viene scelto e eseguito l'algoritmo di ordinamento (merge_sort o quick_sort). La macro TIMING 
+    /* In base al valore di algo, viene scelto e eseguito l'algoritmo di ordinamento (merge_sort o quick_sort). La macro TIMING
     probabilmente misura il tempo di esecuzione dell'ordinamento.
 fflush(stdout) viene usato per forzare la scrittura di tutti i buffer di output prima di misurare il tempo di esecuzione. */
     if (algo == 1)
@@ -101,14 +101,14 @@ fflush(stdout) viene usato per forzare la scrittura di tutti i buffer di output 
 
 int main(int argc, char const *argv[])
 {
-    /* Verifico che il numero di argomenti passati alla linea di comando sia 
+    /* Verifico che il numero di argomenti passati alla linea di comando sia
     esattamente 4 (nome dell'eseguibile incluso). Se non lo è, stampo un messaggio di errore ed esco. */
     if (argc != 4)
     {
         printf("Quando lancio l'eseguibile devo avere: %s <input_file> <output_file> <field>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
-    /* Apro il file di input in modalità lettura ("r"). 
+    /* Apro il file di input in modalità lettura ("r").
     Se il file non può essere aperto (ad esempio, se non esiste), stampo un messaggio di errore e termino. */
     FILE *nome = fopen(argv[1], "r");
     if (nome == NULL)
@@ -116,7 +116,7 @@ int main(int argc, char const *argv[])
         printf("Impossibile aprire il file di input\n");
         exit(EXIT_FAILURE);
     }
-    /* Apro il file di output in modalità scrittura ("w"). 
+    /* Apro il file di output in modalità scrittura ("w").
     Se il file non può essere aperto (ad esempio, se i permessi non lo consentono), stampo un messaggio di errore e termino. */
     FILE *nome_out = fopen(argv[2], "w");
     if (nome_out == NULL)
@@ -124,7 +124,7 @@ int main(int argc, char const *argv[])
         printf("Impossibile aprire il file di output\n");
         exit(EXIT_FAILURE);
     }
-    /* Converto il terzo argomento della linea di comando (una stringa) in un numero intero utilizzando atoi(). 
+    /* Converto il terzo argomento della linea di comando (una stringa) in un numero intero utilizzando atoi().
     Verifico poi che il numero sia compreso tra 1 e 3. Se non lo è, stampo un messaggio di errore e termino. */
     int field = atoi(argv[3]);
     if (field < 1 || field > 3)
@@ -132,7 +132,7 @@ int main(int argc, char const *argv[])
         printf("Campo non valido. Deve essere 1, 2 o 3.\n");
         exit(EXIT_FAILURE);
     }
-    /* Chiedo all'utente di scegliere un algoritmo di ordinamento, merge_sort (1) o quick_sort (2). 
+    /* Chiedo all'utente di scegliere un algoritmo di ordinamento, merge_sort (1) o quick_sort (2).
     Leggo la scelta tramite scanf() e verifico che sia 1 o 2. Se non lo è, stampo un messaggio di errore e termino. */
     int algo;
     printf("Inserisci 1 per merge_sort, 2 per quick_sort: ");

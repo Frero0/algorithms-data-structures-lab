@@ -85,5 +85,6 @@ size: dimensione di ciascun elemento.
 compar: puntatore alla funzione di confronto. */
 void merge_sort_wrapper(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *))
 {
-    if(base!=NULL)merge_sort(base, 0, nitems - 1, size, compar);
+    if (base != NULL)
+        merge_sort(base, 0, nitems - 1, size, compar);
 }

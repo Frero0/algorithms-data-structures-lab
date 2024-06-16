@@ -22,7 +22,7 @@ int min1(int x, int y, int z)
     return min(min(x, y), z);
 }
 
-/* La funzione edit_distance calcola la distanza di editing tra due stringhe s1 e s2 
+/* La funzione edit_distance calcola la distanza di editing tra due stringhe s1 e s2
 di lunghezza m e n rispettivamente, utilizzando un approccio ricorsivo:
 Se una delle due stringhe è vuota, ritorna la lunghezza dell'altra.
 Calcola il costo delle tre operazioni possibili: sostituzione (d_no_op), cancellazione (d_canc), e inserimento (d_ins).
@@ -44,23 +44,32 @@ int edit_distance(char *s1, char *s2, int m, int n)
     return min1(d_no_op, d_canc, d_ins);
 }
 
-/* edit_distance_rec è una funzione ausiliaria per calcolare la distanza di editing 
+/* edit_distance_rec è una funzione ausiliaria per calcolare la distanza di editing
 tra due stringhe str1 e str2 usando la tecnica di memoization (memorizzazione dei risultati intermedi):
 Utilizza una matrice memo per memorizzare i risultati parziali.
 Se memo[i][j] è già calcolato, lo ritorna direttamente.
 Se i o j sono zero, inizializza memo[i][j] rispettivamente con j o i.
 Se i caratteri corrispondenti di str1 e str2 sono uguali, richiama ricorsivamente edit_distance_rec.
 Altrimenti, calcola il costo delle operazioni di cancellazione e inserimento e sceglie il minimo. */
-int edit_distance_rec(char *str1, char *str2, int i, int j, int **memo) {
-    if (memo[i][j] != -1) return memo[i][j];
+int edit_distance_rec(char *str1, char *str2, int i, int j, int **memo)
+{
+    if (memo[i][j] != -1)
+        return memo[i][j];
 
-    if (i == 0) {
+    if (i == 0)
+    {
         memo[i][j] = j;
-    } else if (j == 0) {
+    }
+    else if (j == 0)
+    {
         memo[i][j] = i;
-    } else if (str1[i - 1] == str2[j - 1]) {
+    }
+    else if (str1[i - 1] == str2[j - 1])
+    {
         memo[i][j] = edit_distance_rec(str1, str2, i - 1, j - 1, memo);
-    } else {
+    }
+    else
+    {
         memo[i][j] = 1 + min(edit_distance_rec(str1, str2, i, j - 1, memo),
                              edit_distance_rec(str1, str2, i - 1, j, memo));
     }
@@ -73,7 +82,8 @@ Se una delle stringhe è nulla, ritorna -1.
 Alloca una matrice memo per memorizzare i risultati parziali delle chiamate ricorsive.
 Calcola la distanza di editing chiamando edit_distance_rec con la matrice memo.
 Libera la memoria allocata per memo dopo aver ottenuto il risultato. */
-int edit_distance_dyn(char *str1, char *str2) {
+int edit_distance_dyn(char *str1, char *str2)
+{
     if (str1 == NULL || str2 == NULL)
         return -1;
 
@@ -82,9 +92,11 @@ int edit_distance_dyn(char *str1, char *str2) {
 
     // Crea la matrice di memorizzazione
     int **memo = (int **)malloc((n + 1) * sizeof(int *));
-    for (int i = 0; i <= n; i++) {
+    for (int i = 0; i <= n; i++)
+    {
         memo[i] = (int *)malloc((m + 1) * sizeof(int));
-        for (int j = 0; j <= m; j++) {
+        for (int j = 0; j <= m; j++)
+        {
             memo[i][j] = -1;
         }
     }
@@ -92,14 +104,14 @@ int edit_distance_dyn(char *str1, char *str2) {
     int result = edit_distance_rec(str1, str2, n, m, memo);
 
     // Libera la matrice di memorizzazione
-    for (int i = 0; i <= n; i++) {
+    for (int i = 0; i <= n; i++)
+    {
         free(memo[i]);
     }
     free(memo);
 
     return result;
 }
-
 
 /* Differenze tra l'Algoritmo Dinamico e quello Non Dinamico
 Approccio Non Dinamico (edit_distance):
@@ -112,10 +124,10 @@ Approccio Dinamico (edit_distance_dyn con edit_distance_rec e memoization):
 
 Utilizza una memoization per memorizzare i risultati intermedi delle sottoproblematiche.
 Evita di ricalcolare la distanza di editing per le stesse coppie di sottostringhe multiple volte.
-Questo approccio riduce notevolmente il numero di chiamate ricorsive e migliora l'efficienza, 
+Questo approccio riduce notevolmente il numero di chiamate ricorsive e migliora l'efficienza,
 specialmente per input più grandi e complessi.
 Conclusione
-L'implementazione di edit_distance_dyn con memoization offre una soluzione più efficiente rispetto 
-all'implementazione non dinamica edit_distance. Utilizzando la memoization, si evitano i calcoli 
-ripetuti dei sottoproblemi, migliorando significativamente le prestazioni dell'algoritmo, 
+L'implementazione di edit_distance_dyn con memoization offre una soluzione più efficiente rispetto
+all'implementazione non dinamica edit_distance. Utilizzando la memoization, si evitano i calcoli
+ripetuti dei sottoproblemi, migliorando significativamente le prestazioni dell'algoritmo,
 soprattutto per input di grandi dimensioni o con stringhe lunghe. */

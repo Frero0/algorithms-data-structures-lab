@@ -42,7 +42,7 @@ void test_char_array(void)
 {
   char actual[] = {'d', 'c', 'a', 'b', 'f', 'e', 'g', 'i', 'h', 'l'};
   char expected[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'l'};
-  quick_sort(actual,  9, sizeof(actual[0]), compare_char);
+  quick_sort(actual, 9, sizeof(actual[0]), compare_char);
   TEST_ASSERT_EQUAL_INT8_ARRAY(expected, actual, 9);
 }
 
@@ -74,7 +74,7 @@ void test_negative_int_array(void)
 {
   int actual[] = {-1, -5, -9, -2, -3, -14, -10, -18, -21};
   int expected[] = {-21, -18, -14, -10, -9, -5, -3, -2, -1};
-  quick_sort(actual, 9, sizeof(actual[0]),  compare_int);
+  quick_sort(actual, 9, sizeof(actual[0]), compare_int);
   TEST_ASSERT_EQUAL_INT_ARRAY(expected, actual, 9);
 }
 
@@ -105,17 +105,17 @@ void test_records_array(void)
       {8, "d\0", 24, 1.0001f},
   };
 
-  quick_sort(actual, 9, sizeof(actual[0]),  compare_records_string);
+  quick_sort(actual, 9, sizeof(actual[0]), compare_records_string);
   for (unsigned long i = 0; i < sizeof(actual) / sizeof(actual[0]); i++)
   {
     TEST_ASSERT_EQUAL_STRING(expected[i].field1, actual[i].field1);
   }
-  quick_sort(actual, 9, sizeof(actual[0]),  compare_records_int);
+  quick_sort(actual, 9, sizeof(actual[0]), compare_records_int);
   for (unsigned long i = 0; i < sizeof(actual) / sizeof(actual[0]); i++)
   {
     TEST_ASSERT_EQUAL_INT(expected[i].field2, actual[i].field2);
   }
-  quick_sort(actual, 9, sizeof(actual[0]),  compare_records_float);
+  quick_sort(actual, 9, sizeof(actual[0]), compare_records_float);
   for (unsigned long i = 0; i < sizeof(actual) / sizeof(actual[0]); i++)
   {
     TEST_ASSERT_EQUAL_FLOAT(expected[i].field3, actual[i].field3);
@@ -128,7 +128,7 @@ int main(void)
 
   RUN_TEST(test_null_array);
   RUN_TEST(test_int_array);
-  //RUN_TEST(test_double_array);
+  // RUN_TEST(test_double_array);
   RUN_TEST(test_long_array);
   RUN_TEST(test_float_array);
   RUN_TEST(test_char_array);

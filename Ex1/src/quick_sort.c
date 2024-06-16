@@ -6,8 +6,8 @@
 Copia il contenuto di a in temp.
 Copia il contenuto di b in a.
 Copia il contenuto di temp in b.
-Questa funzione è essenziale per l'algoritmo di ordinamento poiché consente di scambiare gli elementi quando 
-necessario durante l'ordinamento, senza preoccuparsi del tipo di dati specifico dell'array grazie 
+Questa funzione è essenziale per l'algoritmo di ordinamento poiché consente di scambiare gli elementi quando
+necessario durante l'ordinamento, senza preoccuparsi del tipo di dati specifico dell'array grazie
 all'utilizzo di memcpy per operare su blocchi di memoria di dimensione size. */
 void swap(void *a, void *b, size_t size)
 {
@@ -33,7 +33,7 @@ Scambia gli elementi ai puntatori i e j.
 Se l'elemento a i è uguale al pivot, incrementa i.
 Se l'elemento a j è uguale al pivot, decrementa j.
 Questo processo divide l'array in elementi minori del pivot e maggiori del pivot, posizionando il pivot alla sua posizione corretta.*/
-size_t partition(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *)) 
+size_t partition(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *))
 {
     void *pivot = (char *)base + (((nitems - 1) / 2) * size);
 
