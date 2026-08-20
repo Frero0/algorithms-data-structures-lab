@@ -1,0 +1,13 @@
+.DS_Store
+.idea/
+.vscode/
+
+**/bin/
+**/build/
+**/bld/
+*.class
+*.o
+*.out
+
+datasets/
+output/
